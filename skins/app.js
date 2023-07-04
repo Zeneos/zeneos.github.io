@@ -28,7 +28,9 @@ const Skin = mongoose.model('Skin', skinSchema);
 const app = express();
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: "https://zeneos.github.io"
+}));
 app.use(bodyParser.json());
 
 // Routes
