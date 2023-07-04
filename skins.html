@@ -25,9 +25,17 @@
                     for (let skin of skins) {
                         const li = document.createElement('li');
                         const img = document.createElement('img');
-                        img.src = skin.splashUrl;
                         img.alt = `${skin.champion} ${skin.skinName} splash art`;
                         li.textContent = `${skin.champion}: ${skin.skinName}`;
+
+                        // Create a new image object to preload the image
+                        let tempImg = new Image();
+                        tempImg.src = skin.splashUrl;
+                        tempImg.onload = function () {
+                            // When the image has loaded, set the src of the img element
+                            img.src = tempImg.src;
+                        }
+
                         li.appendChild(img);
                         resultsList.appendChild(li);
                     }
