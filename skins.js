@@ -16,13 +16,9 @@ document.getElementById('search-form').addEventListener('submit', function (e) {
                 img.alt = `${skin.champion} ${skin.skinName} splash art`;
                 li.textContent = `${skin.champion}: ${skin.skinName}`;
 
-                // Create a new image object to preload the image
-                let tempImg = new Image();
-                tempImg.src = skin.splashUrl;
-                tempImg.onload = function () {
-                    // When the image has loaded, set the src of the img element
-                    img.src = tempImg.src;
-                }
+                // Construct the local image file path
+                let localImagePath = `images/${skin.champion}_${skin.skinName}.jpg`;
+                img.src = localImagePath;
 
                 li.appendChild(img);
                 resultsList.appendChild(li);
