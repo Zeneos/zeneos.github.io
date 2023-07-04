@@ -1,17 +1,38 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-    <title>LoL Skins</title>
-    <link rel="stylesheet" href="style.css">
+    <title>League of Legends Skin Database</title>
 </head>
-
 <body>
-    <h1>Search for LoL Skins</h1>
-    <input type="text" id="search" placeholder="Search...">
-    <button id="search-button">Search</button>
-    <ul id="results"></ul>
-    <script src="skins.js"></script>
+    <form id="search-form">
+        <input type="text" id="search-input" placeholder="Search skins..." />
+        <button type="submit">Search</button>
+    </form>
+    <ul id="results-list"></ul>
+    <script>
+        document.getElementById('search-form').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const query = document.getElementById('search-input').value;
+            fetch(`https://leagueskindatabase-b3d3c4a5ccc1.herokuapp.com/skins/search?q=${query}`)
+                .then(response => response.json())
+                .then(skins => {
+                    const resultsList = document.getElementById('results-list');
+                    // Clear old results
+                    while (resultsList.firstChild) {
+                        resultsList.firstChild.remove();
+                    }
+                    // Add new results
+                    for (let skin of skins) {
+                        const li = document.createElement('li');
+                        const img = document.createElement('img');
+                        img.src = skin.splashArtUrl;
+                        img.alt = `${skin.champion} ${skin.skinName} splash art`;
+                        li.textContent = `${skin.champion}: ${skin.skinName}`;
+                        li.appendChild(img);
+                        resultsList.appendChild(li);
+                    }
+                });
+        });
+    </script>
 </body>
-
 </html>
