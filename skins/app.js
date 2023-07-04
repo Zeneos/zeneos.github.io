@@ -22,6 +22,11 @@ const skinSchema = new mongoose.Schema({
     price: Number
 });
 
+skinSchema.index({
+  champion: 'text',
+  skinName: 'text'
+});
+
 const Skin = mongoose.model('Skin', skinSchema);
 
 // Create Express app
