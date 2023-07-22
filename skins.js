@@ -1,7 +1,7 @@
 document.getElementById('search-form').addEventListener('submit', function (e) {
     e.preventDefault();
     const query = document.getElementById('search-input').value;
-    fetch(`https://leagueskindatabase-b3d3c4a5ccc1.herokuapp.com/skins/search?q=${query}`)
+    fetch(`https://springbok-umbrella.cyclic.app/skins/search?q=${query}`)
         .then(response => response.json())
         .then(skins => {
             const resultsList = document.getElementById('results-list');
